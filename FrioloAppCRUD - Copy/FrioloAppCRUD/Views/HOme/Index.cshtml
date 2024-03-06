@@ -1,0 +1,65 @@
+﻿@model IEnumerable<EstellaAppCRUD.User>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+
+@if (!String.IsNullOrEmpty(TempData["Msg"] as String))
+{
+    <div class="alert alert-success">@TempData["Msg"]</div>
+}
+<table class="table table-responsive">
+    <tr>
+        <th>Seq #</th>
+        <th>
+            Username
+        </th>
+
+        @if (User.Identity.IsAuthenticated)
+        {
+            <th>Action</th>
+        }
+        
+    </tr>
+
+    @{ int i = 1;}
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @i
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.userName)
+        </td>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                @if (User.IsInRole("Manager"))
+                {
+                    @* Only Manager have the ability to delete and update*@
+                    @Html.ActionLink("Edit", "Edit", new { id = item.id });
+                    <span>|</span>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.id });
+                }
+                
+            </td>
+        }    
+    </tr>
+    i++;
+}
+</table>
+
+
+@if (User.Identity.IsAuthenticated)
+{
+    <p class="col-md-offset-3 col-md-10">
+        @Html.ActionLink("Create New", "Create")
+    </p>
+
+}
