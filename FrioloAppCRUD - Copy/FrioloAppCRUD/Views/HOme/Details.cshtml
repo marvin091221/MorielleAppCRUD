@@ -9,9 +9,9 @@
 <div>
     <h4>User</h4>
     <hr />
-    <dl class="dl-horizontal col-md-offset-4 col-md-pull-1", style="align-items:center">
+    <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.userName)
+            @Html.LabelFor(model => model.userName, "Username: ")
         </dt>
 
         <dd>
@@ -19,16 +19,15 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.passWord)
+            @Html.LabelFor(model => model.passWord, "Password: ")
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.passWord)
         </dd>
-
     </dl>
 </div>
-<p class="col-md-offset-5 col-md-pull-10">
+<p  class="col-md-offset-1">
     @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
